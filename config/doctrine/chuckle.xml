@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Entity\Chuckle" repository-class="App\Repository\ChuckleRepository">
+
+        <id name="id" type="uid" column="id" generator="uuid"  /> <!-- uuid_binary ordered_uuid -->
+
+        <field name="message" type="string" column="message" length="1000" nullable="true"/>
+
+        <many-to-many field="author" target-entity="App\Entity\User">
+            <join-table name="chuckle_user">
+                <join-columns>
+                    <join-column name="chuckle_id" referenced-column-name="id"/>
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="user_id" referenced-column-name="id"/>
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
+        <field name="createdAt" type="datetime_immutable" column="created_at" nullable="true"/>
+
+    </entity>
+
+</doctrine-mapping>
