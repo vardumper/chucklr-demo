@@ -99,7 +99,7 @@ volumes:
 Change .env
 
 ```ini
-DATABASE_URL="mysql://app:app@127.0.0.1:33060/main?serverVersion=8.0.32&charset=utf8mb4"
+DATABASE_URL="mysql://app:app@127.0.0.1:33060/app?serverVersion=8.0.32&charset=utf8mb4"
 ```
 
 For this change to take effect, do:
@@ -116,7 +116,7 @@ By adding PHP and Nginx, you got everything dockerized.
 
 ```yaml
 php:
-    image: php:8.2-fpm
+    image: bitnami/php-fpm:latest
     build: ./docker/php
     depends_on:
       - database
@@ -125,7 +125,7 @@ php:
       - ./docker/php/override.ini:/usr/local/etc/php/conf.d/override.ini
 
   nginx:
-    image: nginx:latest
+    image: bitnami/nginx:latest
     build: ./docker/nginx
     volumes:
       - .:/var/www/html
