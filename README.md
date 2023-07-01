@@ -97,7 +97,7 @@ volumes:
 Change .env
 
 ```ini
-DATABASE_URL="mysql://root:password@127.0.0.1:3306/main?serverVersion=8.0.32&charset=utf8mb4"
+DATABASE_URL="mysql://app:app@127.0.0.1:33060/main?serverVersion=8.0.32&charset=utf8mb4"
 ```
 
 For this change to take effect, do:
