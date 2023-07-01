@@ -13,10 +13,13 @@ https://www.youtube.com/watch?v=Gj2F1GXp-i4
 
 ## Install Symfony-CLI
 
-`brew install symfony-cli/tap/symfony-cli`
+```shell
+brew install symfony-cli/tap/symfony-cli
+```
 
 ## All course commands/steps
-```
+
+```shell
 symfony new chucklr --webapp
 docker compose up -d
 symfony server:start -d
@@ -30,7 +33,7 @@ symfony server:status
 
 Create a Makefile
 
-```
+```makefile
 up:
 	@make down
 	docker compose up -d
@@ -48,7 +51,7 @@ down:
 Run `make up`and `make down` to start and stop the environment.
 Note, that I removed the original built-in symfony server and replaced it with docker php image (see below). So server:start and server:stop aren't needed any longer.
 
-```
+```shell
 symfony console make:user
 symfony console make:auth
 symfony console make:registration-form
@@ -64,14 +67,15 @@ symfony console doctrine:migrations:migrate
 
 symfony composer require encore
 nvm install --lts
-
 ```
 
 ## Taking it further
 
 ### Use Mysql instead of PostgreSQL
+
 Replace postgres part in docker-compose.yml with:
-```
+
+```yaml
 database:
     image: 'bitnami/mysql:latest'
     restart: always
@@ -91,13 +95,14 @@ volumes:
 ```
 
 Change .env
-```
+
+```ini
 DATABASE_URL="mysql://root:password@127.0.0.1:3306/main?serverVersion=8.0.32&charset=utf8mb4"
 ```
 
 For this change to take effect, do:
 
-```
+```shell
 docker-compose down --rmi all
 docker system prune
 docker-compose up -d --build
@@ -106,7 +111,8 @@ docker-compose up -d --build
 ### Making it all Docker
 
 By adding PHP and Nginx, you got everything dockerized.
-```
+
+```yaml
 php:
     image: php:8.2-fpm
     build: ./docker/php
@@ -129,7 +135,8 @@ php:
 ```
 
 Problem solving
-```
+
+```shell
 docker system prune
 docker-compose down --rmi all --volumes --remove-orphans
-
+```
