@@ -67,6 +67,8 @@ symfony console doctrine:migrations:migrate
 
 symfony composer require encore
 nvm install --lts
+npm install
+npm encore dev-server
 ```
 
 ## Taking it further
